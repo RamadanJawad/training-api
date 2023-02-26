@@ -1,5 +1,6 @@
 import 'package:api/api/api_read.dart';
 import 'package:api/model/student.dart';
+import 'package:api/screen/images_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -11,7 +12,6 @@ class UserScreen extends StatefulWidget {
 }
 
 class _UserScreenState extends State<UserScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,26 +25,38 @@ class _UserScreenState extends State<UserScreen> {
                     itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                          leading: CircleAvatar(
-                            radius: 30,
-                            backgroundImage: NetworkImage(
-                              snapshot.data![index].image!,
-                            ),
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) {
+                            return ImagesScreen(
+                              student: snapshot.data![index],
+                            );
+                          }));
+                        },
+                        leading: CircleAvatar(
+                          radius: 30,
+                          backgroundImage: NetworkImage(
+                            snapshot.data![index].image!,
                           ),
-                          title: Text(
-                            snapshot.data![index].firstName!,
-                            style: GoogleFonts.cairo(fontSize: 17),
+                        ),
+                        trailing: Text(
+                          "${snapshot.data![index].imagesCount} images",
+                          style: GoogleFonts.cairo(
+                            fontSize: 15,
                           ),
-                          subtitle: Text(
-                            snapshot.data![index].email!,
-                            style: GoogleFonts.cairo(
-                              fontSize: 16,
-                              color: Colors.grey,
-                            ),
-                            
+                        ),
+                        title: Text(
+                          snapshot.data![index].firstName!,
+                          style: GoogleFonts.cairo(fontSize: 16),
+                        ),
+                        subtitle: Text(
+                          snapshot.data![index].email!,
+                          style: GoogleFonts.cairo(
+                            fontSize: 15,
+                            color: Colors.grey,
                           ),
-                          
-                          );
+                        ),
+                      );
                     });
               }
               return Center(
