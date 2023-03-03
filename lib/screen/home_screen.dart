@@ -1,5 +1,6 @@
 import 'package:api/home/category_screen.dart';
 import 'package:api/home/country_screen.dart';
+import 'package:api/home/get_image.dart';
 import 'package:api/home/search_screen.dart';
 import 'package:api/home/user_screen.dart';
 import 'package:flutter/material.dart';
@@ -22,12 +23,23 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           Padding(
             padding: EdgeInsets.all(8),
-            child: IconButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => SearchScreen()));
-                },
-                icon: Icon(Icons.search)),
+            child: Row(
+              children: [
+                
+                IconButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => GetImage()));
+                    },
+                    icon: Icon(Icons.image)),
+                IconButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (_) => SearchScreen()));
+                    },
+                    icon: Icon(Icons.search)),
+              ],
+            ),
           )
         ],
         backgroundColor: Colors.blueGrey,

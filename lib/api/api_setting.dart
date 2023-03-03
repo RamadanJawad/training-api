@@ -6,6 +6,7 @@ class ApiSetting {
   static const categories = "${_baseApi}categories";
   static const countries = "${_baseApi}countries";
   static const search = "${_baseApi}users/search";
+  static const images = "${_baseApi}student/images/{id}";
 
   static String getCategoryProductUrl(int id) {
     return "${_baseApi}categories/$id/products";

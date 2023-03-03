@@ -1,27 +1,37 @@
 import 'package:api/api/api_read.dart';
-import 'package:api/model/student.dart';
-import 'package:api/model/user.dart';
-import 'package:api/model/user_image.dart';
+import 'package:api/model/student_image.dart';
+import 'package:api/screen/upload_image.dart';
 import 'package:flutter/material.dart';
 
-class ImagesScreen extends StatefulWidget {
-  final Student? student;
-  const ImagesScreen({super.key, this.student});
+class GetImage extends StatefulWidget {
+  const GetImage({super.key});
 
   @override
-  State<ImagesScreen> createState() => _ImagesScreenState();
+  State<GetImage> createState() => _GetImageState();
 }
 
-class _ImagesScreenState extends State<ImagesScreen> {
+class _GetImageState extends State<GetImage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Images of the ${widget.student!.firstName}"),
+        title: Text("Images"),
         backgroundColor: Colors.blueGrey,
+        actions: [
+          Padding(
+            padding: EdgeInsets.all(8),
+            child: IconButton(
+              onPressed: () {
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (_) => UploadImage()));
+              },
+              icon: Icon(Icons.upload_rounded),
+            ),
+          )
+        ],
       ),
-      body: FutureBuilder<List<UserImage>>(
-        future: ApiReadData().readImagesByUser(widget.student!.id!),
+      body: FutureBuilder<List<StudentImage>>(
+        future: ApiReadData().readImages(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const LinearProgressIndicator();
@@ -32,17 +42,17 @@ class _ImagesScreenState extends State<ImagesScreen> {
                 itemCount: snapshot.data!.length,
                 itemBuilder: (context, index) {
                   return Container(
-                    margin: EdgeInsets.all(5),
+                    margin: const EdgeInsets.all(5),
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Image.network(
-                          snapshot.data![index].image!,
+                          snapshot.data![index].imageUrl!,
                           fit: BoxFit.fill,
                         )),
                   );
                 });
           } else {
-            return Text("no data");
+            return const Center(child: Text("no data"));
           }
         },
       ),
