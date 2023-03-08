@@ -30,7 +30,6 @@ class _UploadImageState extends State<UploadImage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Upload Image"),
-        backgroundColor: Colors.blueGrey,
       ),
       body: Column(
         children: [
@@ -87,7 +86,7 @@ class _UploadImageState extends State<UploadImage> {
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text("${apiResponse.message}"),
       behavior: SnackBarBehavior.floating,
-      margin:const EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
     ));
   }
 

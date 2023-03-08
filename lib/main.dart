@@ -4,10 +4,14 @@ import 'package:api/screen/login_screen.dart';
 import 'package:api/screen/product_screen.dart';
 import 'package:api/screen/regisert_screen.dart';
 import 'package:api/screen/splash_screen.dart';
+import 'package:api/theme/service_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await GetStorage.init();
   await AppPreferences().initSharedPreferences();
   runApp(const MyApp());
 }
@@ -17,15 +21,29 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const SplashScreen(),
-      routes: {
-        "/login_screen": (context) => LoginScreen(),
-        "/register_screen": (context) => RegisterScreen(),
-        "/home_screen": (context) => HomeScreen(),
-        "/product_screen": (context) => ProductScreen()
-      },
-    );
+    return GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: const SplashScreen(),
+        theme: ThemeService().lightTheme,
+        darkTheme: ThemeService().darkTheme,
+        themeMode: ThemeService().getThemeMode(),
+        getPages: [
+          GetPage(
+            name: "/login_screen",
+            page: () => const LoginScreen(),
+          ),
+          GetPage(
+            name: "/register_screen",
+            page: () => const RegisterScreen(),
+          ),
+          GetPage(
+            name: "/home_screen",
+            page: () => const HomeScreen(),
+          ),
+          GetPage(
+            name: "/product_screen",
+            page: () => const ProductScreen(),
+          ),
+        ]);
   }
 }

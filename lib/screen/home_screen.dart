@@ -3,7 +3,9 @@ import 'package:api/home/country_screen.dart';
 import 'package:api/home/get_image.dart';
 import 'package:api/home/search_screen.dart';
 import 'package:api/home/user_screen.dart';
+import 'package:api/theme/service_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,27 +24,29 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text("Home Screen"),
         actions: [
           Padding(
-            padding: EdgeInsets.all(8),
-            child: Row(
-              children: [
-                
+              padding: EdgeInsets.all(8),
+              child: Row(children: [
                 IconButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => GetImage()));
+                      Get.to(() => GetImage());
                     },
                     icon: Icon(Icons.image)),
                 IconButton(
                     onPressed: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (_) => SearchScreen()));
+                      Get.to(() => SearchScreen());
                     },
-                    icon: Icon(Icons.search)),
-              ],
-            ),
-          )
+                    icon: const Icon(Icons.search)),
+                IconButton(
+                    onPressed: () {
+                      setState(() {
+                        ThemeService().changeTheme();
+                      });
+                    },
+                    icon: ThemeService().isSavedDarkMode()
+                        ? Icon(Icons.dark_mode_rounded)
+                        : Icon(Icons.light_mode)),
+              ])),
         ],
-        backgroundColor: Colors.blueGrey,
       ),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: index,

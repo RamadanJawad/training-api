@@ -38,10 +38,12 @@ dependencies:
   google_fonts: ^4.0.3
   image_picker: ^0.8.6+4
   http: ^0.13.5
-  open_file: ^3.2.1
-  dio: ^5.0.1
   path_provider: ^2.0.13
   shared_preferences: ^2.0.18
+  flutter_file_downloader: ^1.1.0+1
+  get: ^4.6.5
+  get_storage: ^2.1.1
+  permission_handler: ^10.2.0
 
 dev_dependencies:
   flutter_test:

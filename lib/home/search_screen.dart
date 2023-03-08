@@ -31,7 +31,6 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blueGrey,
         title: Container(
           width: double.infinity,
           height: 40,
@@ -40,6 +39,7 @@ class _SearchScreenState extends State<SearchScreen> {
           child: Center(
             child: TextField(
               controller: searchController,
+              style: TextStyle(color: Colors.black),
               onChanged: (val) {
                 setState(() {
                   searchController.text = val;

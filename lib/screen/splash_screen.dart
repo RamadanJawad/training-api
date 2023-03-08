@@ -1,32 +1,16 @@
+import 'package:api/controller/splash_controller.dart';
 import 'package:api/save_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
-
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(Duration(seconds: 3), () {
-      if (AppPreferences().loggedIn) {
-        Navigator.pushReplacementNamed(context, "/home_screen");
-      } else {
-        Navigator.pushReplacementNamed(context, "/login_screen");
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    Get.put(SplashController());
     return Scaffold(
-      backgroundColor: Colors.blueGrey,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -34,12 +18,12 @@ class _SplashScreenState extends State<SplashScreen> {
           Center(
             child: Text(
               "RestFul Api",
-              style: GoogleFonts.cairo(fontSize: 25, color: Colors.white),
+              style: GoogleFonts.cairo(fontSize: 25),
             ),
           ),
           const Spacer(),
           const CupertinoActivityIndicator(
-            color: Colors.white,
+            
           )
         ],
       ),

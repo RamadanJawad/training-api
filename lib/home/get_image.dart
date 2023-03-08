@@ -16,7 +16,6 @@ class _GetImageState extends State<GetImage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Images"),
-        backgroundColor: Colors.blueGrey,
         actions: [
           Padding(
             padding: EdgeInsets.all(8),
